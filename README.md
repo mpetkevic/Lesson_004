@@ -1,10 +1,13 @@
 Домашнее задание №3
+
 Задание выполняется в двух файлах. Файл functions.php содержит все функции.
 Функции именуются task1, task2, task3, с маленькой буквы, слитно. Файл с именем
 index.php содержит require(‘functions.php’); и вызов всех функций.
+
 Задание #1
+
 1. Дан XML файл. Сохраните его под именем data.xml:
-`<?xml version="1.0"?>
+```<?xml version="1.0"?>
 <PurchaseOrder PurchaseOrderNumber="99503" OrderDate="1999-10-20">
 <Address Type="Shipping">
 <Name>Ellen Adams</Name>
@@ -38,7 +41,7 @@ driveway.</DeliveryNotes>
 <ShipDate>1999-05-21</ShipDate>
 </Item>
 </Items>
-</PurchaseOrder>`
+</PurchaseOrder>```
 
 
 2. Написать скрипт, который выведет всю информацию из этого файла в удобно
