@@ -148,10 +148,10 @@ function task3()
 
 function task4()
 {
-//    $file = file_get_contents('https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json');
-//    $file = json_decode($file,true);
-//    echo "<pre>";
-//    echo "Page ID: " .  $file['query']['pages']['15580374']['pageid']. "<br>";
-//    echo "Title: " . $file['query']['pages']['15580374']['title'];
-    echo "task4";
+    $file = file_get_contents('https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json');
+    $file = json_decode($file,true);
+    echo "<pre>";
+    echo "Page ID: " .  $file['query']['pages']['15580374']['pageid']. "<br>";
+    echo "Title: " . $file['query']['pages']['15580374']['title'];
+
 }
