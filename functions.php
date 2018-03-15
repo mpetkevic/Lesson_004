@@ -1,136 +1,123 @@
 <?php
 
-/**
- * @param array $arrayString
- * @param bool $flag
- * @return string
- */
-function task1(array $arrayString, $flag = false)
+function task1($file)
 {
-    foreach ($arrayString as $value) {
-        echo "<p>" . $value . "</p>";
-    }
-
-    if ($flag == true) {
-        return implode($arrayString);
-    }
+    $info = file_get_contents($file);
+    $xml = new SimpleXMLElement($info);
+    echo "Order Number: ";
+    print_r($xml->attributes()->PurchaseOrderNumber->__toString());
+    echo "<br>";
+    echo "Order Date: ";
+    print_r($xml->attributes()->OrderDate->__toString());
+    echo "<br><br>Shipping Address:<br>";
+    echo "Name: ";
+    print_r($xml->Address[0]->Name->__toString());
+    echo "<br>";
+    echo "Street: ";
+    print_r($xml->Address[0]->Street->__toString());
+    echo "<br>";
+    echo "City: ";
+    print_r($xml->Address[0]->City->__toString());
+    echo "<br>";
+    echo "State: ";
+    print_r($xml->Address[0]->State->__toString());
+    echo "<br>";
+    echo "Zip: ";
+    print_r($xml->Address[0]->Zip->__toString());
+    echo "<br>";
+    echo "Country: ";
+    print_r($xml->Address[0]->Country->__toString());
+    echo "<br><br>Billing Address:<br>";
+    echo "Name: ";
+    print_r($xml->Address[1]->Name->__toString());
+    echo "<br>";
+    echo "Street: ";
+    print_r($xml->Address[1]->Street->__toString());
+    echo "<br>";
+    echo "City: ";
+    print_r($xml->Address[1]->City->__toString());
+    echo "<br>";
+    echo "State: ";
+    print_r($xml->Address[1]->State->__toString());
+    echo "<br>";
+    echo "Zip: ";
+    print_r($xml->Address[1]->Zip->__toString());
+    echo "<br>";
+    echo "Country: ";
+    print_r($xml->Address[1]->Country->__toString());
+    echo "<br><br>";
+    echo "Delivery Notes: ";
+    print_r($xml->DeliveryNotes->__toString());
+    echo "<br>";
+    echo "Item 1: ";
+    echo "<br>";
+    echo "Part Number: ";
+    print_r($xml->Items->Item[0]->attributes()->PartNumber->__toString());
+    echo "<br>";
+    echo "Product Name: ";
+    print_r($xml->Items->Item[0]->ProductName->__toString());
+    echo "<br>";
+    echo "Quantity: ";
+    print_r($xml->Items->Item[0]->Quantity->__toString());
+    echo "<br>";
+    echo "US Price: ";
+    print_r($xml->Items->Item[0]->USPrice->__toString());
+    echo "<br>";
+    echo "Comment: ";
+    print_r($xml->Items->Item[0]->Comment->__toString());
+    echo "<br>";
+    echo "<br>";
+    echo "Item 2: ";
+    echo "<br>";
+    echo "Part Number: ";
+    print_r($xml->Items->Item[1]->attributes()->PartNumber->__toString());
+    echo "<br>";
+    echo "Product Name: ";
+    print_r($xml->Items->Item[1]->ProductName->__toString());
+    echo "<br>";
+    echo "Quantity: ";
+    print_r($xml->Items->Item[1]->Quantity->__toString());
+    echo "<br>";
+    echo "US Price: ";
+    print_r($xml->Items->Item[1]->USPrice->__toString());
+    echo "<br>";
+    echo "Comment: ";
+    print_r($xml->Items->Item[1]->Comment->__toString());
+    echo "<br>";
 }
 
-/**
- * @param array $data
- * @param string $operator
- * @return null
- */
-function task2(array $data, string $operator)
+function task2()
 {
-    $result = array_shift($data);
-
-    foreach ($data as $value) {
-        switch ($operator) {
-            case "-":
-                $result -= $value;
-                break;
-            case "+":
-                $result += $value;
-                break;
-            case "*":
-                $result *= $value;
-                break;
-            case "/":
-                $result /= $value;
-                break;
-            default:
-                echo "Поддерживаются толко операции +, -, *, /";
-                return null;
-        }
-    }
-
-    echo $result;
+    echo "Task 2";
+    $array = [
+      "Student 1" => [
+          "Name" => "Anthony",
+          "Lastname" => "Robbins"
+      ],
+      "Student 2" => [
+          "Name" => "Thomas",
+          "Lastname" => "Dunn"
+      ]
+    ];
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+    $data = json_encode($array);
+    echo $data;
+    file_put_contents('output.json',$data, FILE_APPEND);
 }
 
-/**
- *
- */
 function task3()
 {
-    $data = func_get_args();
-    $operator = array_shift($data);
-    task2($data, $operator);
-}
-
-/**
- * @param integer $rowCount
- * @param integer $colCount
- * @return null
- */
-function task4($rowCount, $colCount)
-{
-    if ($rowCount < 1 || $colCount < 1) {
-        return null;
+    echo "CSV";
+    $numbArray = [];
+    for ($i = 0; $i < 50; $i++) {
+        $number = rand(1,100);
+        $numbArray[] = $number;
     }
+    echo "<pre>";
+    print_r($numbArray);
+    echo "</pre>";
 
-    $content = "";
 
-    for ($i = 1; $i <= $rowCount; $i++) {
-        $content .= "<tr>";
-
-        for ($j = 1; $j <= $colCount; $j++) {
-            $content .= sprintf("<td>%d</td>", $i * $j);
-        }
-
-        $content .= "</tr>";
-    }
-
-    echo "<table>", $content, "</table>";
-
-    task4(--$rowCount, --$colCount);
-}
-
-/**
- * @param string $str
- * @return bool
- */
-function isPalindrome($str)
-{
-    $str = strtoupper(str_replace(" ", "", $str));
-
-    $length = strlen($str);
-
-    if ($length < 2) {
-        return true;
-    }
-
-    if ($str[0] !== $str[$length - 1]) {
-        return false;
-    }
-
-    return isPalindrome(mb_substr($str, 1, -1));
-}
-
-/**
- * @param string $str
- */
-function task5($str)
-{
-    echo $str, " - ", (isPalindrome($str)) ? "Палиндром!" : "Не палиндром";
-}
-
-function task6()
-{
-    // TODO:
-}
-
-function task7()
-{
-    // TODO:
-}
-
-function task8()
-{
-    // TODO:
-}
-
-function task9()
-{
-    // TODO:
 }
