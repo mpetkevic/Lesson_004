@@ -88,24 +88,37 @@ function task1($file)
 
 function task2()
 {
-    echo "Task 2";
     $array = [
-      "Student 1" => [
+      "Student1" => [
           "Name" => "Anthony",
           "Lastname" => "Robbins"
       ],
-      "Student 2" => [
+      "Student2" => [
           "Name" => "Thomas",
           "Lastname" => "Dunn"
       ]
     ];
-    echo "<pre>";
-    print_r($array);
-    echo "</pre>";
+
     $data = json_encode($array);
-    echo $data;
+    echo "output.json: " . $data . "<br>";
     file_put_contents('output.json',$data, FILE_APPEND);
+    $data2 = file_get_contents('output2.json');
+    echo "output2.json: " . $data2 . "<br>";
+    $newJson = json_decode($data2,true);
+    $result1 = array_diff_assoc($array[key($array)], $newJson[key($newJson)]);
+    $result2 = array_diff_assoc($newJson[key($newJson)], $array[key($array)]);
+    echo "Difference: ";
+    $totalResult = [
+      "output.json" => $result1,
+      "output2.json" => $result2
+    ];
+    echo "<br>";
+    echo "<pre>";
+    print_r($totalResult);
+    echo "</pre>";
+
 }
+
 
 function task3()
 {
