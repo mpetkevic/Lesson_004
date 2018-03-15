@@ -128,9 +128,30 @@ function task3()
         $number = rand(1,100);
         $numbArray[] = $number;
     }
-    echo "<pre>";
-    print_r($numbArray);
-    echo "</pre>";
+    $handle = fopen('data.csv', 'a');
+        fputcsv($handle, $numbArray);
 
+        fclose($handle);
+    $handle = fopen('data.csv', 'r');
+    $csvData = '';
+    while(($data = fgetcsv($handle)) !== false) {
+        $csvData = $data;
+    }
+    fclose($handle);
+    $sum = 0;
+    foreach ($csvData as $digit) {
+        $sum += $digit;
+    }
+    echo $sum;
 
+}
+
+function task4()
+{
+//    $file = file_get_contents('https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json');
+//    $file = json_decode($file,true);
+//    echo "<pre>";
+//    echo "Page ID: " .  $file['query']['pages']['15580374']['pageid']. "<br>";
+//    echo "Title: " . $file['query']['pages']['15580374']['title'];
+    echo "task4";
 }

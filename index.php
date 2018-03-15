@@ -24,14 +24,20 @@ echo "<p>", task2(), "</p>";
 echo "</div>";
 
 /**
- * Task 2
+ * Task 3
  */
 echo "<div class='jumbotron'>";
 echo "<h2>Задание 3:</h2>";
 echo "<p>", task3(), "</p>";
 echo "</div>";
 
-
+/**
+ * Task 4
+ */
+echo "<div class='jumbotron'>";
+echo "<h2>Задание 4:</h2>";
+echo "<p>", task4(), "</p>";
+echo "</div>";
 
 
 $content = ob_get_contents();
